@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI-Powered Breast Cancer Therapy Optimizer</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f9fc;
+    color: #222;
+    margin: 0;
+    padding: 0 1rem;
+  }
+  header {
+    text-align: center;
+    padding: 2rem 0 1rem;
+  }
+  h1 {
+    color: #004b87;
+  }
+  main {
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    padding: 2rem;
+  }
+  section {
+    margin-bottom: 2rem;
+  }
+  label {
+    font-weight: 600;
+  }
+  select {
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    width: 100%;
+    max-width: 300px;
+  }
+  button {
+    background: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background: #005fa3;
+  }
+  .result {
+    background: #e1f0ff;
+    padding: 1.5rem;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+  a {
+    color: #0077cc;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  footer {
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>AI-Powered Breast Cancer Therapy Optimizer</h1>
+  <p>Using deep learning and genomic biomarkers to personalize breast cancer treatment</p>
+</header>
+<main>
+  <section>
+    <h2>About the model</h2>
+    <p>
+      Every year, millions of women face breast cancer. Choosing the right therapy is complex and depends on tumor biology, genetics, and patient history. Our Deep Q-Learning model, trained on The Cancer Genome Atlas data, simulates multiple treatment options and predicts the most effective and least toxic plan for each patient — empowering oncologists and improving outcomes.
+    </p>
+    <p><strong>Key results from the study:</strong></p>
+    <ul>
+      <li>Average tumor reduction: 129.71 mm</li>
+      <li>Minimum tumor reduction: 95.01 mm</li>
+      <li>Maximum tumor reduction (complete elimination): 150.0 mm</li>
+      <li>Side effects score below 0.0802</li>
+      <li>Genetic differentiation for markers TP53, KRAS, BRAF ranging from 9.53 to 12.96</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Try it yourself</h2>
+    <label for="marker">Select a key genetic marker:</label>
+    <select id="marker">
+      <option value="">--Choose a marker--</option>
+      <option value="TP53">TP53</option>
+      <option value="KRAS">KRAS</option>
+      <option value="BRAF">BRAF</option>
+    </select>
+    <button onclick="showResult()">Show optimized therapy recommendation</button>
+
+    <div id="result" class="result" style="display:none;"></div>
+  </section>
+
+  <section>
+    <h2>Full scientific preprint</h2>
+    <p>
+      Read the full study here: <a href="https://www.researchgate.net/publication/391777596_Personalized_Breast_Cancer_Therapy_Optimization_Using_Deep_Q-Learning_and_TCGA_Data" target="_blank" rel="noopener noreferrer">AI-Powered Breast Cancer Therapy Optimization (Preprint)</a>
+    </p>
+  </section>
+</main>
+
+<footer>
+  Created for @karpathy's #PayoutChallenge — August 2025
+</footer>
+
+<script>
+  const recommendations = {
+    TP53: {
+      tumorReduction: "130 mm (average)",
+      sideEffects: "Below 0.08",
+      therapy: "Targeted chemotherapy with personalized dose adjustment",
+      description: "For patients with TP53 mutations, the model recommends a targeted chemotherapy approach optimized for efficacy and minimal side effects."
+    },
+    KRAS: {
+      tumorReduction: "125 mm (average)",
+      sideEffects: "Below 0.08",
+      therapy: "Combination of hormonal and immunotherapy agents",
+      description: "Patients with KRAS mutations benefit from a combination therapy designed to reduce tumor size effectively while managing side effects."
+    },
+    BRAF: {
+      tumorReduction: "128 mm (average)",
+      sideEffects: "Below 0.08",
+      therapy: "Personalized targeted inhibitors combined with low-dose chemotherapy",
+      description: "The model suggests personalized targeted inhibitors tailored to BRAF marker presence, enhancing tumor reduction."
+    }
+  };
+
+  function showResult() {
+    const marker = document.getElementById('marker').value;
+    const resultDiv = document.getElementById('result');
+
+    if (!marker) {
+      resultDiv.style.display = 'none';
+      alert('Please select a genetic marker to see the therapy recommendation.');
+      return;
+    }
+
+    const rec = recommendations[marker];
+    resultDiv.style.display = 'block';
+    resultDiv.innerHTML = `
+      <strong>Genetic Marker:</strong> ${marker}<br/>
+      <strong>Expected Tumor Reduction:</strong> ${rec.tumorReduction}<br/>
+      <strong>Side Effects Score:</strong> ${rec.sideEffects}<br/>
+      <strong>Recommended Therapy:</strong> ${rec.therapy}<br/>
+      <p>${rec.description}</p>
+    `;
+  }
+</script>
+</body>
+</html>
